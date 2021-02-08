@@ -1,3 +1,10 @@
+if (((net accounts | Select-String "Minimum password age") -replace '\D+(\d+)','$1') -gt 0) {
+    echo "Your mininmum password age is not 0, which means you can't change your password immediately after a previous change, running this script is not recommended"
+    $continue = Read-Host -Prompt 'Continue anyway? [y/n]' 
+        if ($continue -ne 'y' -or $continue -ne 'Y') {
+            exit
+        }
+}
 $passwordarray = foreach($i in 1..25) {'t3mpp4ss'+$i}
 $secretoldpass = Read-Host -assecurestring -Prompt 'Input your password'
 $oldpass = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($secretoldpass))
