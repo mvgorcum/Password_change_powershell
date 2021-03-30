@@ -1,4 +1,4 @@
-if (((((net accounts | Select-String "Minimum password age") -replace '\D+(\d+)','$1') -as [int]) -gt 0) {
+if (((((net accounts | Select-String "Minimum password age") -replace '\D+(\d+)','$1') -as [int]) -gt 0)) {
     echo "Your mininmum password age is not 0, which means you can't change your password immediately after a previous change, running this script is not recommended"
     $continue = Read-Host -Prompt 'Continue anyway? [y/n]' 
         if ($continue -ne 'y' -or $continue -ne 'Y') {
@@ -34,3 +34,4 @@ if ($?) {
                               }
 }
 else {echo "wrong username and/or password, try again"}
+[void](Read-Host 'Press Enter to continue…')
